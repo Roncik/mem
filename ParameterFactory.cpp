@@ -18,4 +18,6 @@ std::unique_ptr<Parameter> ParameterFactory::create(char short_name, const char*
 
         if (sv == Read::name) return std::make_unique<Read>();
     }
+
+    throw std::logic_error("Invalid arguments passed to ParameterFactory::create");
 }

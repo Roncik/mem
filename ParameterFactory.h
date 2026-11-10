@@ -3,6 +3,6 @@
 
 namespace ParameterFactory
 {
-	std::unique_ptr<Parameter> create(char short_name, const char* name = nullptr);
+	std::unique_ptr<Parameter> create(char short_name = 0, const char* name = nullptr);
 };
 
