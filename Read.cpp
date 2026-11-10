@@ -11,32 +11,7 @@ void Read::handler()
 		return;
 	}
 
-	DWORD PID{};
-	{
-		const auto& arg1 = arguments[0];
-		//check whether arg1 is a PID or process name
-		std::string_view sv{ arg1 };
-		if (sv.find(".exe") != std::string_view::npos)
-		{
-			//process name
-			Process::GetPidByProcessName(sv, PID);
-			if (!PID)
-			{
-				std::cerr << "Couldn't find PID of this process name\n";
-				return;
-			}
-		}
-		else
-		{
-			//PID
-			PID = std::stoi(arg1);
-			if (!PID)
-			{
-				std::cerr << "Couldn't parse PID\n";
-				return;
-			}
-		}
-	}
+	DWORD PID = parse_pid(arguments[0]);
 
 	UHANDLE handle{ Process::OpenProcessAllAccess(PID) };
 

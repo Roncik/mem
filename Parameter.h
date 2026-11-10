@@ -15,6 +15,8 @@ public:
 	void add_argument(const char* arg) { arguments.push_back(arg); }
 	int get_num_of_arguments() { return num_of_arguments; }
 
+	DWORD parse_pid(const char* arg);
+
 	virtual void handler() = 0;
 };
 

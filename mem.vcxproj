@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="mem.cpp" />
+    <ClCompile Include="ModuleBase.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="ParameterFactory.cpp" />
     <ClCompile Include="pch.cpp">
@@ -144,6 +145,7 @@
     <ClCompile Include="Read.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ModuleBase.h" />
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="ParameterFactory.h" />
     <ClInclude Include="pch.h" />

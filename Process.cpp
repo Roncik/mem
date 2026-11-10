@@ -35,3 +35,34 @@ HANDLE Process::OpenProcessAllAccess(DWORD PID)
 {
 	return OpenProcess(PROCESS_ALL_ACCESS, FALSE, PID);
 }
+
+std::uintptr_t Process::GetModuleBaseAddress(DWORD processId, std::string_view moduleName)
+{
+    HANDLE snapshot = CreateToolhelp32Snapshot(
+        TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32,
+        processId
+    );
+
+    if (snapshot == INVALID_HANDLE_VALUE)
+        return NULL;
+
+    MODULEENTRY32 moduleEntry{};
+    moduleEntry.dwSize = sizeof(moduleEntry);
+
+    if (Module32First(snapshot, &moduleEntry))
+    {
+        do
+        {
+            if (_stricmp(moduleEntry.szModule, moduleName.data()) == 0)
+            {
+                CloseHandle(snapshot);
+                return reinterpret_cast<std::uintptr_t>(
+                    moduleEntry.modBaseAddr
+                    );
+            }
+        } while (Module32Next(snapshot, &moduleEntry));
+    }
+
+    CloseHandle(snapshot);
+    return NULL;
+}

@@ -45,6 +45,9 @@
     <ClCompile Include="ParameterFactory.cpp">
       <Filter>Parameter</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleBase.cpp">
+      <Filter>Parameter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -63,6 +66,9 @@
       <Filter>UHANDLE</Filter>
     </ClInclude>
     <ClInclude Include="ParameterFactory.h">
+      <Filter>Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleBase.h">
       <Filter>Parameter</Filter>
     </ClInclude>
   </ItemGroup>
