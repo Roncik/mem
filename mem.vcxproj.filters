@@ -19,6 +19,12 @@
     <Filter Include="Parameter">
       <UniqueIdentifier>{f9c630b5-1b97-407a-9293-83c273c3176e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Process">
+      <UniqueIdentifier>{04ddc27c-b789-4ff5-8216-25f6e6636f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UHANDLE">
+      <UniqueIdentifier>{33f33b04-fee2-491f-ba29-a890904de32b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mem.cpp">
@@ -30,12 +36,33 @@
     <ClCompile Include="Parameter.cpp">
       <Filter>Parameter</Filter>
     </ClCompile>
+    <ClCompile Include="Read.cpp">
+      <Filter>Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="Process.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="ParameterFactory.cpp">
+      <Filter>Parameter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
     </ClInclude>
     <ClInclude Include="Parameter.h">
+      <Filter>Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="Read.h">
+      <Filter>Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="Process.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="UHANDLE.h">
+      <Filter>UHANDLE</Filter>
+    </ClInclude>
+    <ClInclude Include="ParameterFactory.h">
       <Filter>Parameter</Filter>
     </ClInclude>
   </ItemGroup>

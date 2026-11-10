@@ -1,17 +1,19 @@
 #pragma once
 class Parameter
 {
-private:
+protected:
 	char short_name{};
 	std::string name{};
 	int num_of_arguments{};
-	std::vector<char*> arguments{}; //arguments here are strings not literal bytes
+	std::vector<const char*> arguments{}; //arguments here are strings not literal bytes
 
-	Parameter(char short_name, char* name, int num_of_arguments) : short_name{ short_name }, name{ name }, num_of_arguments{ num_of_arguments } {}
-	Parameter(char short_name, char* name) : Parameter(short_name, name, 0) {}
+	Parameter(char short_name, const char* name, int num_of_arguments) : short_name{ short_name }, name{ name }, num_of_arguments{ num_of_arguments } {}
+	Parameter(char short_name, const char* name) : Parameter(short_name, name, 0) {}
 	Parameter(char short_name) : Parameter(short_name, nullptr) {}
 
 public:
+	void add_argument(const char* arg) { arguments.push_back(arg); }
+
 	virtual void handler() = 0;
 };
 
