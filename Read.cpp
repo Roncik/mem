@@ -7,7 +7,7 @@ void Read::handler()
 {
 	if (arguments.size() != this->num_of_arguments)
 	{
-		std::cerr << "Invalid argument number\n";
+		std::cerr << "Invalid number of arguments passed. Expected: " << this->num_of_arguments << ". Got: " << arguments.size() << ".\n";
 		return;
 	}
 

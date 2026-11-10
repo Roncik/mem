@@ -13,14 +13,11 @@ protected:
 
 public:
 	void add_argument(const char* arg) { arguments.push_back(arg); }
+	int get_num_of_arguments() { return num_of_arguments; }
 
 	virtual void handler() = 0;
 };
 
 //When I add parameters I will have to implement a factory that will create the parameter objects based on the short_name or name
-//The above should be in the logic of the parameter parser:
-//1. read the name
-//2. create parameter object using factory based on name
-//3. read the arguments
-//4. add the arguments into the argument list of the parameter
+
 

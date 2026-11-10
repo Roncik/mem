@@ -19,5 +19,8 @@ std::unique_ptr<Parameter> ParameterFactory::create(char short_name, const char*
         if (sv == Read::name) return std::make_unique<Read>();
     }
 
-    throw std::logic_error("Invalid arguments passed to ParameterFactory::create");
+    std::cerr << "Invalid parameter name was passed: " << (short_name ? std::string(short_name, 1) : std::string(name)) << '\n';
+    exit(1);
+    //do not throw exceptions, ai might not be able to handle them when using a debug binary.
+    //throw std::logic_error("Invalid arguments passed to ParameterFactory::create");
 }
