@@ -17,6 +17,8 @@ public:
 
 	DWORD parse_pid(const char* arg);
 
+	bool validate_arg_count();
+
 	virtual void handler() = 0;
 };
 

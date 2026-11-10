@@ -5,7 +5,7 @@
 
 void Read::handler()
 {
-	if (arguments.size() != this->num_of_arguments)
+	if (!validate_arg_count())
 	{
 		std::cerr << "Invalid number of arguments passed. Expected: " << this->num_of_arguments << ". Got: " << arguments.size() << ".\n";
 		return;
@@ -71,7 +71,7 @@ void Read::handler()
 	SIZE_T bytes_read{};
 	if (!ReadProcessMemory(handle, reinterpret_cast<void*>(read_address), read_buffer.data(), read_size, &bytes_read))
 	{
-		std::cerr << "ReadProcessMemory failed with: " << GetLastError() << '\n';
+		std::cerr << "ReadProcessMemory failed with error code: " << GetLastError() << '\n';
 		return;
 	}
 

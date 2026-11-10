@@ -30,3 +30,8 @@ DWORD Parameter::parse_pid(const char* arg)
 
 	return PID;
 }
+
+bool Parameter::validate_arg_count()
+{
+	return arguments.size() == num_of_arguments;
+}
