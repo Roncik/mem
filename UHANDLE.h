@@ -9,7 +9,7 @@ public:
 
 	~UHANDLE()
 	{
-		if (handle && handle != INVALID_HANDLE_VALUE)
+		if (is_valid())
 			CloseHandle(handle);
 	}
 
@@ -21,7 +21,7 @@ public:
 
 	UHANDLE(UHANDLE&& other) noexcept
 	{
-		if (handle && handle != INVALID_HANDLE_VALUE)
+		if (is_valid())
 			CloseHandle(handle);
 		handle = other.handle;
 		other.handle = NULL;
@@ -29,7 +29,7 @@ public:
 
 	UHANDLE& operator=(UHANDLE&& other) noexcept
 	{
-		if (handle && handle != INVALID_HANDLE_VALUE)
+		if (is_valid())
 			CloseHandle(handle);
 		handle = other.handle;
 		other.handle = NULL;
