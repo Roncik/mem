@@ -4,6 +4,7 @@
 #include "ModuleBase.h"
 #include "Write.h"
 #include "Patternscan.h"
+#include "Help.h"
 
 std::unique_ptr<Parameter> ParameterFactory::create(char short_name, const char* name)
 {
@@ -15,6 +16,7 @@ std::unique_ptr<Parameter> ParameterFactory::create(char short_name, const char*
         case ModuleBase::short_name: return std::make_unique<ModuleBase>();
         case Write::short_name: return std::make_unique<Write>();
         case Patternscan::short_name: return std::make_unique<Patternscan>();
+        case Help::short_name: return std::make_unique<Help>();
         }
     }
 
@@ -26,6 +28,7 @@ std::unique_ptr<Parameter> ParameterFactory::create(char short_name, const char*
         if (sv == ModuleBase::name) return std::make_unique<ModuleBase>();
         if (sv == Write::name) return std::make_unique<Write>();
         if (sv == Patternscan::name) return std::make_unique<Patternscan>();
+        if (sv == Help::name) return std::make_unique<Help>();
     }
 
     std::cerr << "Invalid parameter name was passed: " << (name ? std::string(name) : std::string(short_name, 1)) << '\n';

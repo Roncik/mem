@@ -57,7 +57,10 @@ int main(int argc, char* argv[])
         for (size_t i = 0; i < param_arg_count; ++i, ++arg_counter)
         {
             const auto& curr_arg{ argv[arg_counter] };
-            parameter.get()->add_argument(curr_arg);
+            if (curr_arg[0] != '-')
+                parameter.get()->add_argument(curr_arg);
+            else
+                break;
         }
 
         parameter.get()->handler();

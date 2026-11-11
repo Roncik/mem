@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="ModuleBase.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Write.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Help.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ModuleBase.h" />
     <ClInclude Include="Parameter.h" />
