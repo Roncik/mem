@@ -28,6 +28,9 @@
     <Filter Include="PatternScanner">
       <UniqueIdentifier>{449f54c8-8dba-4833-bff7-8ce6273d7bc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{d7bd84ff-e4ec-45db-b168-5263e554506b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mem.cpp">
@@ -60,6 +63,9 @@
     <ClCompile Include="Patternscan.cpp">
       <Filter>Parameter</Filter>
     </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -91,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="Patternscan.h">
       <Filter>Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

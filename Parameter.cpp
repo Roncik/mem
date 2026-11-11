@@ -48,7 +48,7 @@ std::uintptr_t Parameter::parse_address(const char* arg)
 
 	if (!address)
 	{
-		std::cerr << "Parsing the read address failed\n";
+		std::cerr << "Parsing the read address failed or 0 passed\n";
 		return NULL;
 	}
 

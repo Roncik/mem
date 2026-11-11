@@ -2,6 +2,7 @@
 #include "Read.h"
 #include "Process.h"
 #include "UHANDLE.h"
+#include "Helper.h"
 
 void Read::handler()
 {
@@ -55,14 +56,25 @@ void Read::handler()
 		std::cerr << "The full size couldn't be read. Passed size: " << read_size << " Read size: " << bytes_read << '\n';
 	}
 
-	std::ostream
-	if (bytes_read <= 10000)
 	
-	std::cout << "Read bytes: ";
+	if (bytes_read <= 10000)
+	{
+		std::cout << "Read bytes: ";
 
-	for (char c : read_buffer)
-		std::cout << std::format("{:02X}", static_cast<uint8_t>(c)) << ' ';
+		for (char c : read_buffer)
+			std::cout << std::format("{:02X}", static_cast<uint8_t>(c)) << ' ';
 
-	std::cout << '\n';
+		std::cout << '\n';
+	}
+	else
+	{
+		//save result to bin file
+		std::string path{};
+		auto file = Helper::CreateTimestampedFile(&path);
 
+		for (char c : read_buffer)
+			file << c;
+
+		std::cout << "Read bytes saved to file: " << path << '\n';
+	}
 }
