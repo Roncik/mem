@@ -37,7 +37,7 @@ public:
 
 	bool is_valid() const noexcept 
 	{
-		return handle != nullptr && handle != INVALID_HANDLE_VALUE;
+		return handle && handle != nullptr && handle != INVALID_HANDLE_VALUE;
 	}
 
 	explicit operator bool() const noexcept 

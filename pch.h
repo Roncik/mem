@@ -8,6 +8,7 @@
 #include <string_view>
 #include <functional>
 #include <vector>
+#include <sstream>
 
 #define PCH_H
 #endif

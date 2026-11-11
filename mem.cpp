@@ -68,9 +68,6 @@ int main(int argc, char* argv[])
         parameter.get()->handler();
     }
     
-    
-    
-    
     return 0;
 }
 

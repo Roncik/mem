@@ -25,7 +25,7 @@ void ModuleBase::handler()
 
 	if (!base)
 	{
-		std::cerr << "Failed to get base for the given module name: " << module_name << '\n';
+		std::cerr << "Failed to get base for the module name: " << module_name << '\n';
 		return;
 	}
 

@@ -21,48 +21,18 @@ void Read::handler()
 		return;
 	}
 
-	std::uintptr_t read_address{};
+	std::uintptr_t read_address{ parse_address(arguments[1])};
+	if (!read_address)
 	{
-		const auto& arg2 = arguments[1];
-		std::string_view sv2{ arg2 };
-		if (sv2.find("0x") != std::string_view::npos)
-		{
-			//hexadecimal
-			read_address = std::stoull(arg2, nullptr, 16);
-		}
-		else
-		{
-			//decimal
-			read_address = std::stoull(arg2);
-		}
-
-		if (!read_address)
-		{
-			std::cerr << "Parsing the read address failed\n";
-			return;
-		}
+		std::cerr << "Failed to parse read address\n";
+		return;
 	}
 
-	std::size_t read_size{};
+	std::size_t read_size{ parse_size(arguments[2])};
+	if (!read_size)
 	{
-		const auto& arg3 = arguments[2];
-		std::string_view sv3{ arg3 };
-		if (sv3.find("0x") != std::string_view::npos)
-		{
-			//hexadecimal
-			read_size = std::stoull(arg3, nullptr, 16);
-		}
-		else
-		{
-			//decimal
-			read_size = std::stoull(arg3);
-		}
-
-		if (!read_size || read_size > 300000) //cap read size at 300kb to avoid alloc errors
-		{
-			std::cerr << "Parsing of the read size failed or invalid value passed\n";
-			return;
-		}
+		std::cerr << "Failed to parse size or 0 passed\n";
+		return;
 	}
 
 	std::vector<char> read_buffer(read_size);

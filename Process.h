@@ -6,5 +6,7 @@ namespace Process
 	HANDLE OpenProcessAllAccess(DWORD PID);
 
 	std::uintptr_t GetModuleBaseAddress(DWORD processId, std::string_view moduleName);
+
+	bool WriteMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffer, SIZE_T nSize, BOOL force = FALSE);
 };
 

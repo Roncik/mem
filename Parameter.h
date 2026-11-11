@@ -18,6 +18,8 @@ public:
 	int get_num_of_arguments() { return num_of_arguments; }
 
 	DWORD parse_pid(const char* arg);
+	std::uintptr_t parse_address(const char* arg);
+	std::uintptr_t parse_size(const char* arg);
 
 	bool validate_arg_count();
 
