@@ -7,17 +7,13 @@ namespace
 	const char* gCurrentPath{};
 }
 
-// arguments:
-// read/write/patternscan/getmodulebase/dumpgamemodule
+// todo:
 // dump game module
 // class informer?
 // persistent history?
-// --help
 
-// how to return the read data? <= 10000bytes = hexstring, > = binfile
 // pattern scanning should have an option to only scan pages that are executable
 // there should be an option to select operation on game module only or on all modules loaded in the process
-// claude should be able to build the vs project
 
 
 
