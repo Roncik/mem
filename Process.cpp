@@ -36,7 +36,7 @@ HANDLE Process::OpenProcessAllAccess(DWORD PID)
 	return OpenProcess(PROCESS_ALL_ACCESS, FALSE, PID);
 }
 
-std::uintptr_t Process::GetModuleBaseAddress(DWORD processId, std::string_view moduleName)
+std::uintptr_t Process::GetModuleBaseAddress(DWORD processId, std::string_view moduleName, size_t* outSize)
 {
     HANDLE snapshot = CreateToolhelp32Snapshot(
         TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32,
@@ -56,9 +56,9 @@ std::uintptr_t Process::GetModuleBaseAddress(DWORD processId, std::string_view m
             if (_stricmp(moduleEntry.szModule, moduleName.data()) == 0)
             {
                 CloseHandle(snapshot);
-                return reinterpret_cast<std::uintptr_t>(
-                    moduleEntry.modBaseAddr
-                    );
+                if (outSize)
+                    *outSize = moduleEntry.modBaseSize;
+                return reinterpret_cast<std::uintptr_t>(moduleEntry.modBaseAddr);
             }
         } while (Module32Next(snapshot, &moduleEntry));
     }
@@ -104,7 +104,7 @@ bool Process::WriteMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffe
     bool modifiedProtection = false;
 
     // 2. Check if the page is already writable
-    if (!IsWritable(currentProtect)) {
+    if (!IsWritable(currentProtect) && force) {
         // Determine target protection based on executable status
         DWORD newProtect = IsExecutable(currentProtect) ? PAGE_EXECUTE_READWRITE : PAGE_READWRITE;
 

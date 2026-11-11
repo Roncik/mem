@@ -25,6 +25,9 @@
     <Filter Include="UHANDLE">
       <UniqueIdentifier>{33f33b04-fee2-491f-ba29-a890904de32b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PatternScanner">
+      <UniqueIdentifier>{449f54c8-8dba-4833-bff7-8ce6273d7bc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mem.cpp">
@@ -51,6 +54,12 @@
     <ClCompile Include="Write.cpp">
       <Filter>Parameter</Filter>
     </ClCompile>
+    <ClCompile Include="PatternScanner.cpp">
+      <Filter>PatternScanner</Filter>
+    </ClCompile>
+    <ClCompile Include="Patternscan.cpp">
+      <Filter>Parameter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -75,6 +84,12 @@
       <Filter>Parameter</Filter>
     </ClInclude>
     <ClInclude Include="Write.h">
+      <Filter>Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternScanner.h">
+      <Filter>PatternScanner</Filter>
+    </ClInclude>
+    <ClInclude Include="Patternscan.h">
       <Filter>Parameter</Filter>
     </ClInclude>
   </ItemGroup>

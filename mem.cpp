@@ -8,12 +8,7 @@ namespace
 }
 
 // arguments:
-// process name/PID
-// virtual address
-// size
 // read/write/patternscan/getmodulebase/dumpgamemodule
-// write data(with optional force to write to non-writable)
-// pattern
 // dump game module
 // class informer?
 // persistent history?

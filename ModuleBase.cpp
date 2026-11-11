@@ -12,6 +12,11 @@ void ModuleBase::handler()
 	}
 
 	DWORD PID = parse_pid(arguments[0]);
+	if (!PID)
+	{
+		std::cerr << "Failed to parse PID/process name\n";
+		return;
+	}
 
 	UHANDLE handle{ Process::OpenProcessAllAccess(PID) };
 	if (!handle)
@@ -22,10 +27,9 @@ void ModuleBase::handler()
 
 	const auto& module_name = arguments[1];
 	const auto base = Process::GetModuleBaseAddress(PID, module_name);
-
 	if (!base)
 	{
-		std::cerr << "Failed to get base for the module name: " << module_name << '\n';
+		std::cerr << "Failed to get base address for the module name: " << module_name << '\n';
 		return;
 	}
 

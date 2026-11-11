@@ -1,5 +1,5 @@
 #pragma once
-class PatternScan
+class PatternScanner
 {
 	static inline constexpr SIZE_T BUFFER_SIZE = 1000000; // 1MB buffer
 	
@@ -10,9 +10,9 @@ public:
 		std::string mask;
 	};
 
-	static uintptr_t In_Scan(uint8_t* pattern, char* mask, uintptr_t begin, size_t size);
+	static uintptr_t In_Scan(const uint8_t* pattern, const char* mask, uintptr_t begin, size_t size);
 
-	static uintptr_t Ex_Scan(uint8_t* pattern, char* mask, const uintptr_t& begin, const uintptr_t& end, const SIZE_T& bufferSize = BUFFER_SIZE);
+	static uintptr_t Ex_Scan(const HANDLE& handle, const uint8_t* pattern, const char* mask, const uintptr_t& begin, const uintptr_t& end, const SIZE_T& bufferSize = BUFFER_SIZE);
 
 	static uint64_t get_offset_from_instruction(uintptr_t instruction_address, uintptr_t base_of_module);
 

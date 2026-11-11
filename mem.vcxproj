@@ -137,6 +137,8 @@
     <ClCompile Include="ModuleBase.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="ParameterFactory.cpp" />
+    <ClCompile Include="Patternscan.cpp" />
+    <ClCompile Include="PatternScanner.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -149,6 +151,8 @@
     <ClInclude Include="ModuleBase.h" />
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="ParameterFactory.h" />
+    <ClInclude Include="Patternscan.h" />
+    <ClInclude Include="PatternScanner.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="Read.h" />
