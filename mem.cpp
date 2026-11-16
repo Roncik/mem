@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ParameterFactory.h"
+#include "Help.h"
 
 
 namespace
@@ -20,6 +21,12 @@ namespace
 
 int main(int argc, char* argv[])
 {
+    if (argc < 2)
+    {
+        Help().handler();
+        return 1;
+    }
+    
     gCurrentPath = argv[0]; // first argument is always current executable path
     int arg_counter{ 1 };
     for (; arg_counter < argc;)
