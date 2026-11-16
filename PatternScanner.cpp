@@ -1,98 +1,48 @@
 #include "pch.h"
 #include "PatternScanner.h"
 
-
-uintptr_t PatternScanner::In_Scan(const uint8_t* pattern, const char* mask, uintptr_t begin, size_t size)
+uintptr_t PatternScanner::scan_range(const HANDLE& handle, const uint8_t* pattern, const char* mask, const uintptr_t begin, const uintptr_t end, const size_t bufferSize)
 {
-	size_t patternLength = strlen(mask);
-
-	for (unsigned int i = 0; i < size - patternLength; i++)
+	//check whether memory boundaries are readable
+	if (char byte{}; !ReadProcessMemory(handle, reinterpret_cast<void*>(begin), &byte, 1, nullptr) ||
+		!ReadProcessMemory(handle, reinterpret_cast<void*>(end), &byte, 1, nullptr))
 	{
-		bool found = true;
-		for (unsigned int j = 0; j < patternLength; j++)
+		std::cerr << "Invalid address range for pattern scan passed\n";
+		return NULL;
+	}
+
+	std::vector<std::uint8_t> buffer{};
+	buffer.reserve(bufferSize);
+
+	const size_t patternLen = strlen(mask);
+
+	for (size_t chunk_start{ begin }; chunk_start <= end; chunk_start += bufferSize - patternLen)
+	{
+		SIZE_T read_count{};
+		bool read_result = ReadProcessMemory(handle, reinterpret_cast<void*>(chunk_start), buffer.data(), bufferSize, &read_count);
+		if (!read_result && !read_count)
+			return NULL;
+
+		size_t pattern_id{ 0 };
+
+		for (size_t i{}; i < read_count; ++i)
 		{
-			if (mask[j] != '?' && pattern[j] != *(uint8_t*)(begin + i + j))
+			const auto& current_byte{ buffer.data()[i] };
+			
+			if (current_byte == pattern[pattern_id] || mask[pattern_id] == '?')
 			{
-				found = false;
-				break;
+				if (pattern_id == patternLen - 1)
+					return chunk_start + i + 1 - patternLen;
+				
+				++pattern_id;
+			}
+			else
+			{
+				pattern_id = 0;
 			}
 		}
-		if (found)
-		{
-			return (begin + i);
-		}
+
 	}
-	return 0;
+
+	return NULL;
 }
-
-uintptr_t PatternScanner::Ex_Scan(const HANDLE& handle, const uint8_t* pattern, const char* mask, const uintptr_t& begin, const uintptr_t& end, const SIZE_T& bufferSize)
-{
-	uintptr_t currentChunk = begin;
-	size_t patternSize = strlen(mask);
-	SIZE_T bytesRead = bufferSize;
-
-	while (currentChunk < end)
-	{
-		std::unique_ptr<uint8_t[]> Buffer = std::make_unique<uint8_t[]>(bufferSize);
-
-		ReadProcessMemory(handle, reinterpret_cast<void*>(currentChunk), Buffer.get(), bufferSize, &bytesRead);
-
-		uintptr_t internalAddress = In_Scan(pattern, mask, reinterpret_cast<uintptr_t>(Buffer.get()), bytesRead);
-
-		if (internalAddress != 0)
-		{
-			//calculate from internal to external
-			uintptr_t offsetFromBuffer = internalAddress - reinterpret_cast<uintptr_t>(Buffer.get());
-			return (currentChunk + offsetFromBuffer);
-		}
-		else
-		{
-			//advance to next chunk
-			currentChunk += (bytesRead - patternSize);
-			if ((currentChunk + bytesRead) > end && currentChunk != end)
-			{
-				currentChunk = end - (bytesRead - patternSize);
-			}
-		}
-	}
-	return 0;
-}
-
-//uint64_t PatternScanner::get_offset_from_instruction(uintptr_t instruction_address, uintptr_t base_of_module)
-//{
-//	if (!instruction_address)
-//		return 0;
-//	uint64_t offsetnextinstruction = (instruction_address + 0x3 + 0x4) - base_of_module;
-//	uint64_t lpoffset = ReadPM<uint32_t>(instruction_address + 0x3) + offsetnextinstruction;
-//	return lpoffset;
-//}
-//
-//uint64_t PatternScanner::get_offset_from_instruction_2(uintptr_t instruction_address, uintptr_t base_of_module)
-//{
-//	if (!instruction_address)
-//		return 0;
-//	uint64_t offsetnextinstruction = (instruction_address + 0x2 + 0x5) - base_of_module;
-//	uint64_t lpoffset = ReadPM<uint32_t>(instruction_address + 0x2) + offsetnextinstruction;
-//	return lpoffset;
-//}
-//
-//uint64_t PatternScanner::get_offset_from_sig(uint8_t* signature, char* mask, uintptr_t start, uintptr_t end)
-//{
-//	return get_offset_from_instruction((uintptr_t)Ex_Scan(signature, mask, start, end), (uintptr_t)start);
-//}
-//
-//uint64_t PatternScanner::get_offset_from_sig_2(uint8_t* signature, char* mask, uintptr_t start, uintptr_t end)
-//{
-//	return get_offset_from_instruction_2((uintptr_t)Ex_Scan(signature, mask, start, end), (uintptr_t)start);
-//}
-//
-//uint64_t PatternScanner::get_offset_wrapper(const Signature& sig, uint64_t start, uint64_t end)
-//{
-//	uintptr_t ex_scan_result = (uintptr_t)Ex_Scan((uint8_t*)sig.bytes.data(), (char*)sig.mask.c_str(), start, end);
-//	return get_offset_from_instruction(ex_scan_result, start);
-//}
-//
-//uint64_t PatternScanner::get_offset_wrapper_2(const Signature& sig, uint64_t start, uint64_t end)
-//{
-//	return get_offset_from_instruction_2((uintptr_t)Ex_Scan((uint8_t*)sig.bytes.data(), (char*)sig.mask.c_str(), start, end), start);
-//}

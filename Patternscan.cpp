@@ -51,7 +51,7 @@ void Patternscan::handler()
 	//pattern mask(xxx????xx)
 	const char* pattern_mask = arguments[3];
 
-	std::uintptr_t result = PatternScanner::Ex_Scan(handle, pattern_bytes.data(), pattern_mask, module_base, module_base + module_size);
+	std::uintptr_t result = PatternScanner::scan_range(handle, pattern_bytes.data(), pattern_mask, module_base, module_base + module_size);
 	if (!result)
 	{
 		std::cerr << "Pattern was not found in the given module\n";
