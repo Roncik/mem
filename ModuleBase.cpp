@@ -26,12 +26,13 @@ void ModuleBase::handler()
 	}
 
 	const auto& module_name = arguments[1];
-	const auto base = Process::GetModuleBaseAddress(PID, module_name);
+	size_t module_size{};
+	const auto base = Process::GetModuleBaseAddress(PID, module_name, &module_size);
 	if (!base)
 	{
 		std::cerr << "Failed to get base address for the module name: " << module_name << '\n';
 		return;
 	}
 
-	std::cout << module_name << " Base: " << base << '\n';
+	std::cout << "Name: " << module_name << " | Base: " << std::hex << "0x" << base << " | Size: " << std::hex << "0x" << module_size << '\n';
 }

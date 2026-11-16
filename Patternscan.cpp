@@ -58,5 +58,5 @@ void Patternscan::handler()
 		return;
 	}
 
-	std::cout << "Pattern found at: " << result << '\n';
+	std::cout << "Pattern found at: " << std::hex << "0x" << result << '\n';
 }
