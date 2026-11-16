@@ -34,5 +34,6 @@ void ModuleBase::handler()
 		return;
 	}
 
-	std::cout << "Name: " << module_name << " | Base: " << std::hex << "0x" << base << " | Size: " << std::hex << "0x" << module_size << '\n';
+	std::cout << "Name: " << module_name << " | Base: " << std::hex << "0x" << base 
+		<< " | Size: " << std::hex << "0x" << module_size << '\n';
 }

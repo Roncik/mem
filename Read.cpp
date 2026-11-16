@@ -62,7 +62,7 @@ void Read::handler()
 		std::cout << "Read bytes: ";
 
 		for (char c : read_buffer)
-			std::cout << std::format("{:02X}", static_cast<uint8_t>(c)) << ' ';
+			std::cout << "0x" << std::format("{:02X}", static_cast<uint8_t>(c)) << ' ';
 
 		std::cout << '\n';
 	}
